@@ -2,8 +2,11 @@
 
 require('dotenv').config();
 
-const server = require('./src/server.js');
+const { db } = require('./src/models');
+const { start } = require('./src/server.js');
 
 const PORT =  process.env.PORT;
 
-server.start(PORT);
+db.sync()
+  .then(() => start(PORT))
+  .catch(err => console.log(err));

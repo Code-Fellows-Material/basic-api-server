@@ -1,31 +1,31 @@
 'use strict';
 
 const express = require('express');
-const {foodModel} = require('../models/index');
+const {dogModel} = require('../models/index');
 
 const router = express.Router(); 
 
-router.get('/food', read);
-router.get('/food/:id', read);
-router.post('/food', create);
-router.patch('/food/:id', update);
-router.put('/food/:id', updateAll);
-router.delete('/food/:id', remove);
+router.get('/dog', read);
+router.get('/dog/:id', read);
+router.post('/dog', create);
+router.patch('/dog/:id', update);
+router.put('/dog/:id', updateAll);
+router.delete('/dog/:id', remove);
 
 async function read(req, res, next) {
   try{
     console.log('GET HIT');
     let { id } = req.params;
-    let foods;
+    let dogs;
     if (id) {
-      foods = await foodModel.findOne({where: {id}});
+      dogs = await dogModel.findOne({where: {id}});
     } else {
-      foods = await foodModel.findAll();
+      dogs = await dogModel.findAll();
     }
   
     let resObject = {
-      count: foods ? foods.length : 1,
-      results: foods,
+      count: dogs ? dogs.length : 1,
+      results: dogs,
     };
     res.status(200).json(resObject);
   } catch (err){
@@ -37,8 +37,8 @@ async function create(req, res, next) {
   console.log('POST HIT: ');
   try{
     let updateObj = req.body;
-    const foodObj = await foodModel.create(updateObj);
-    res.status(201).json(foodObj);
+    const dogObj = await dogModel.create(updateObj);
+    res.status(201).json(dogObj);
   }catch (err){
     res.status(500).send(err);
   }
@@ -50,14 +50,14 @@ async function update(req, res, next) {
     let {id} = req.params;
     let updateObj = req.body;
     if(id){
-      let responce = await foodModel.update(updateObj, {
+      let responce = await dogModel.update(updateObj, {
         where: {
           id: id,
         },
       });
       console.log(responce);
-      let food = await foodModel.findOne({where: {id}});
-      res.status(202).json(food);
+      let dog = await dogModel.findOne({where: {id}});
+      res.status(202).json(dog);
     }
   } catch (err){
     res.status(500).send(err);
@@ -70,14 +70,14 @@ async function updateAll(req, res, next) {
     let {id} = req.params;
     let updateObj = req.body;
     if(id){
-      let responce = await foodModel.update(updateObj, {
+      let responce = await dogModel.update(updateObj, {
         where: {
           id: id,
         },
       });
       console.log(responce);
-      let food = await foodModel.findOne({where: {id}});
-      res.status(202).json(food);
+      let dog = await dogModel.findOne({where: {id}});
+      res.status(202).json(dog);
     }
   } catch (err){
     res.status(500).send(err);
@@ -88,14 +88,14 @@ async function remove(req, res, next) {
   try{
     console.log('DELETE HIT');
     let {id} = req.params;
-    await foodModel.destroy({
+    await dogModel.destroy({
       where: {
         id: id,
       },
     });
-    let food = await foodModel.findOne({where: {id}});
-    console.log(food);
-    res.status(204).send(food);
+    let dog = await dogModel.findOne({where: {id}});
+    console.log(dog);
+    res.status(204).send(dog);
   } catch (err){
     res.status(500).send(err);
   }
