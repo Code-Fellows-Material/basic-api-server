@@ -70,12 +70,12 @@ async function updateAll(req, res, next) {
     let {id} = req.params;
     let updateObj = req.body;
     if(id){
-      let responce = await dogModel.update(updateObj, {
+      let response = await dogModel.update(updateObj, {
         where: {
           id: id,
         },
       });
-      console.log(responce);
+      console.log(response);
       let dog = await dogModel.findOne({where: {id}});
       res.status(202).json(dog);
     }
