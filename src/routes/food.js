@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/food', read);
 router.get('/food/:id', read);
 router.post('/food', create);
-router.patch('/food/:id', update);
+router.put('/food/:id', update);
 router.put('/food/:id', updateAll);
 router.delete('/food/:id', remove);
 
@@ -46,7 +46,7 @@ async function create(req, res, next) {
 
 async function update(req, res, next) {
   try{
-    console.log('PATCH HIT: ');
+    console.log('PUT HIT: ');
     let {id} = req.params;
     let updateObj = req.body;
     if(id){
