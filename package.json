@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Kellen-Linse/basic-api-server#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^11.0.0",
     "express": "^4.17.2",
     "jest": "^27.4.7",
